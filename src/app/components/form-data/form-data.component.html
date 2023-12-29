@@ -1,0 +1,76 @@
+<form *ngIf="form" class="form-container" [formGroup]="form">
+    <div class="row">
+        <!-- Código -->
+        <div class="col-md-6">
+            <label for="id" class="form-label">ID</label>
+            <input type="text" id="id" formControlName="id" class="custom-input" placeholder="Ingrese Id..." [ngClass]="{ 'disabled': action === 'edit' }" (focus)="onFocus('id')" (blur)="onBlur()" [class.is-invalid]="showErrors('id')">
+            <div *ngIf="showErrors('id')">
+                <div *ngIf="getValueInput('id')?.errors?.['required']" class="invalid-feedback">Este campo es requerido.</div>
+                <div *ngIf="getValueInput('id')?.errors?.['minlength']" class="invalid-feedback">El Id debe tener al menos 3 caracteres.</div>
+                <div *ngIf="getValueInput('id')?.errors?.['maxlength']" class="invalid-feedback">El Id no puede tener más de 10 caracteres.</div>
+            </div>
+        </div>
+
+        <!-- Nombre -->
+        <div class="col-md-6">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" id="name" formControlName="name" class="custom-input" placeholder="Ingrese Nombre..." (focus)="onFocus('name')" (blur)="onBlur()" [class.is-invalid]="showErrors('name')">
+            <div *ngIf="showErrors('name')">
+                <div *ngIf="getValueInput('name')?.errors?.['required']" class="invalid-feedback">Este campo es requerido.</div>
+                <div *ngIf="getValueInput('name')?.errors?.['minlength']" class="invalid-feedback">El nombre debe tener al menos 5 caracteres.</div>
+                <div *ngIf="getValueInput('name')?.errors?.['maxlength']" class="invalid-feedback">El nombre no puede tener más de 100 caracteres.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Descripcion -->
+        <div class="col-md-6">
+            <label for="description" class="form-label">Descripción</label>
+            <input type="text" id="description" formControlName="description" class="custom-input" placeholder="Ingrese Descripción..." (focus)="onFocus('description')" (blur)="onBlur()" [class.is-invalid]="showErrors('description')">
+            <div *ngIf="showErrors('description')">
+                <div *ngIf="getValueInput('description')?.errors?.['required']" class="invalid-feedback">Este campo es requerido.</div>
+                <div *ngIf="getValueInput('description')?.errors?.['minlength']" class="invalid-feedback">La descripción debe tener al menos 10 caracteres.</div>
+                <div *ngIf="getValueInput('description')?.errors?.['maxlength']" class="invalid-feedback">La descripción no puede tener más de 200 caracteres.</div>
+            </div>
+        </div>
+
+        <!--Logo -->
+        <div class="col-md-6">
+            <label for="logo" class="form-label">Logo</label>
+            <input type="text" id="logo" formControlName="logo" class="custom-input" (focus)="onFocus('logo')" placeholder="Ingrese ruta o link del logo..." (blur)="onBlur()" [class.is-invalid]="showErrors('logo')">
+            <div *ngIf="showErrors('logo')">
+                <div *ngIf="getValueInput('logo')?.errors?.['required']" class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Fecha de Liberación -->
+        <div class="col-md-6">
+            <label for="date_release" class="form-label">Fecha Liberación</label>
+            <input type="date" id="date_release" formControlName="date_release" class="custom-input" [min]="maxDate" (change)="onDateChange()">
+            <div *ngIf="getValueInput('date_release')?.invalid && (getValueInput('date_release')?.dirty || getValueInput('date_release')?.touched)">
+                <div *ngIf="getValueInput('date_release')?.errors?.['required']" class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        </div>
+
+        <!-- Fecha de Revisión -->
+        <div class="col-md-6">
+            <label for="date_revision" class="form-label" [ngClass]="{ 'disabled': true }">Fecha Revisión</label>
+            <input type="date" id="date_revision" formControlName="date_revision" class="custom-input" [ngClass]="{ 'disabled': true }">
+            <div *ngIf="getValueInput('date_revision')?.invalid && (getValueInput('date_revision')?.dirty || getValueInput('date_revision')?.touched)">
+                <div *ngIf="getValueInput('date_revision')?.errors?.['required']" class="invalid-feedback">Este campo es requerido.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row buttons-container">
+        <div class="col-6">
+            <button type="submit" class="btn btn-secondary" (click)="resetForm()">Reiniciar</button>
+        </div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary" [ngClass]="{ 'disabled': form.invalid }" [disabled]="form.invalid" (click)="saveDataForm()">Enviar</button>
+        </div>
+    </div>
+</form>

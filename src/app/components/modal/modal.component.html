@@ -1,0 +1,9 @@
+<div class="modal">
+  <div class="modal-content">
+    <p>{{ message }}</p>
+    <div class="button-container">
+      <button *ngIf="type === 'confirm'" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      <button class="btn btn-primary" (click)="onConfirm()">{{type === 'confirm' ? 'Eliminar' : 'Aceptar'}}</button>
+    </div>
+  </div>
+</div>

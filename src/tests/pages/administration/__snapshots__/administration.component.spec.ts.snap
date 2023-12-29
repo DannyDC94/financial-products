@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdministrationComponent Debe hacer match con el snapshot 1`] = `
+"<app-header ng-reflect-logo="assets/imgs/BP_logo.svg"><header><img alt="Pichincha" src="assets/imgs/BP_logo.svg"></header></app-header><main><div class="container-skeleton"><ngx-skeleton-loader count="5" _nghost-a-c3247267950="" ng-reflect-count="5" ng-reflect-theme="[object Object]"><div _ngcontent-a-c3247267950="" aria-busy="true" aria-valuemin="0" aria-valuemax="100" role="progressbar" tabindex="-1" class="skeleton-loader progress" ng-reflect-ng-class="[object Object]" ng-reflect-ng-style="[object Object]" aria-label="loading" aria-valuetext="Loading..." style="border-radius: 5px; height: 50px; background-color: rgb(229, 229, 229); border: 1px solid white;"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><div _ngcontent-a-c3247267950="" aria-busy="true" aria-valuemin="0" aria-valuemax="100" role="progressbar" tabindex="-1" class="skeleton-loader progress" ng-reflect-ng-class="[object Object]" ng-reflect-ng-style="[object Object]" aria-label="loading" aria-valuetext="Loading..." style="border-radius: 5px; height: 50px; background-color: rgb(229, 229, 229); border: 1px solid white;"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><div _ngcontent-a-c3247267950="" aria-busy="true" aria-valuemin="0" aria-valuemax="100" role="progressbar" tabindex="-1" class="skeleton-loader progress" ng-reflect-ng-class="[object Object]" ng-reflect-ng-style="[object Object]" aria-label="loading" aria-valuetext="Loading..." style="border-radius: 5px; height: 50px; background-color: rgb(229, 229, 229); border: 1px solid white;"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><div _ngcontent-a-c3247267950="" aria-busy="true" aria-valuemin="0" aria-valuemax="100" role="progressbar" tabindex="-1" class="skeleton-loader progress" ng-reflect-ng-class="[object Object]" ng-reflect-ng-style="[object Object]" aria-label="loading" aria-valuetext="Loading..." style="border-radius: 5px; height: 50px; background-color: rgb(229, 229, 229); border: 1px solid white;"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><div _ngcontent-a-c3247267950="" aria-busy="true" aria-valuemin="0" aria-valuemax="100" role="progressbar" tabindex="-1" class="skeleton-loader progress" ng-reflect-ng-class="[object Object]" ng-reflect-ng-style="[object Object]" aria-label="loading" aria-valuetext="Loading..." style="border-radius: 5px; height: 50px; background-color: rgb(229, 229, 229); border: 1px solid white;"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><!--bindings={
+  "ng-reflect-ng-for-of": ",,,,"
+}--></ngx-skeleton-loader></div><!--bindings={
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><!--container--></main><ngx-spinner type="ball-scale-multiple" _nghost-a-c2009170884="" ng-reflect-type="ball-scale-multiple"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></ngx-spinner><!--bindings={
+  "ng-reflect-ng-if": "false"
+}-->"
+`;

@@ -1,0 +1,43 @@
+<div class="options-table">
+  <div>
+    <input class="custom-input" type="text" placeholder="Search..." [(ngModel)]="filterText" (keyup)="applyFilter()"/>
+  </div>
+  <div class="new-btn">
+    <button class="btn btn-primary" (click)="btnAction('create', {})">Agregar</button>
+  </div>
+</div>
+<div class="table-container">
+  <div *ngIf="filteredData.length === 0" class="no-results">No hay resultados</div>
+  <table *ngIf="filteredData.length > 0" class="table">
+    <thead class="thead">
+    <tr>
+      <th class="{{column.breakpoint}}" *ngFor="let column of tableOptions.columns" scope="col">{{column.name}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of filteredData; let idx = index">
+      <td class="{{column.breakpoint}}" *ngFor="let column of tableOptions.columns">
+        <div *ngIf="!column.type">{{data[column.field]}}</div>
+        <div *ngIf="column.type === 'date'">{{data[column.field] | formatDate}}</div>
+        <img *ngIf="column.type === 'image'" [src]="data[column.field]" alt="image" class="image-table"/>
+        <div *ngIf="column.type === 'actions'"  class="dropdown" [class.active]="data[column.field]">
+          <button><img style="width: 40%; min-width: 0.8rem;" [src]="'assets/imgs/three_point.svg'" alt="No imagen"/></button>
+          <div class="dropdown-content">
+            <a (click)="btnAction('edit', data)">Editar</a>
+            <a (click)="btnAction('delete', data)">Eliminar</a>
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div *ngIf="filteredData.length > 0"  class="table-footer">
+    <div class="">{{filteredData.length}} {{filteredData.length === 1 ? 'Resultado' : 'Resultados'}}</div>
+    <div>
+      <select class="select-info" id="cantidad" [(ngModel)]="selectedValue" (change)="applyFilter()">
+        <option *ngFor="let option of cantidadOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+

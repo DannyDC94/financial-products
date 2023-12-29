@@ -1,0 +1,18 @@
+<app-header [logo]="imgHeader"></app-header>
+
+<main>
+  <div class="return-main" routerLink="/administration">Regresar</div>
+  <div class="container">
+    <div class="row form-row" style="justify-content: center">
+      <h1 class="text-semibold" style="text-align: center">Formulario de {{action === 'edit' ? 'Edición' : 'Registro'}} </h1>
+    </div>
+
+    <app-form-data [action]="action" [form]="formProduct" [data]="dataForm" (btnSave)="saveProduct($event)"></app-form-data>
+
+  </div>
+</main>
+
+<ngx-spinner type="ball-scale-multiple"><p style="color: white" >Guardando...</p></ngx-spinner>
+
+<app-modal *ngIf="showModal" [type]="'alert'" [message]="modalMessage" (confirm)="onConfirm()"></app-modal>
+

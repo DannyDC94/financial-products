@@ -1,0 +1,17 @@
+<app-header [logo]="imgHeader"></app-header>
+
+<main>
+    <div class="container-skeleton" *ngIf="!showTable; else loadedContent">
+      <ngx-skeleton-loader count="5" [theme]="skeletonTheme"></ngx-skeleton-loader>
+    </div>
+    <ng-template #loadedContent>
+      <app-data-table [tableData]="dataTable" [tableOptions]="tableOptions" (btnActions)="actionProduct($event)"></app-data-table>
+    </ng-template>
+</main>
+
+<ngx-spinner type="ball-scale-multiple"><p>Cargando...</p></ngx-spinner>
+
+<app-modal *ngIf="showConfirmModal" [message]="confirmMessage" (confirm)="onConfirm()" (cancel)="onCancel()"></app-modal>
+
+<app-modal *ngIf="showModalMessage" [type]="'alert'" [message]="modalMessage" (confirm)="onCancel()"></app-modal>
+

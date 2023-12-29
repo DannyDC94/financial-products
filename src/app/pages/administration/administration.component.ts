@@ -102,6 +102,8 @@ export class AdministrationComponent implements OnInit, OnDestroy {
         if (v.text.indexOf('Product successfully removed') > -1) {
           this.spinner.hide()
           this.loadProducts();
+        } else {
+          this.openModalMessage('Existen errores el eliminar el producto');
         }
       },
       error: (e) => {

@@ -4,5 +4,6 @@ export interface Product {
   logo: string,
   description: string,
   date_release: string,
-  date_revision: string
+  date_revision: string,
+  code?: string
 }

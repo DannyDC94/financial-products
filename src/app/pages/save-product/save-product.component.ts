@@ -7,7 +7,16 @@ import { concatMap } from 'rxjs/operators';
 
 import { FinancialProductsService} from '../../services/financial-products.service';
 import { Utils } from '../../utils/utils';
-import {Product} from "../../interfaces";
+import { Product } from "../../interfaces";
+
+const PRODUCT: Product = {
+  id: '',
+  name: '',
+  logo: '',
+  description: '',
+  date_release: '',
+  date_revision: ''
+}
 
 @Component({
   selector: 'app-save-product',
@@ -55,14 +64,9 @@ export class SaveProductComponent implements OnInit, OnDestroy {
         })
     );
   }
-   saveProduct(evt: any) {
-    if (this.formProduct && this.formProduct.valid) {
-      if (evt.action === 'edit') {
-        this.editProduct();
-      } else {
-        this.saveNewProduct();
-      }
-    }
+  saveProduct(evt: any) {
+    if (this.formProduct?.valid)
+      (evt.action === 'edit') ? this.editProduct() : this.saveNewProduct();
   }
 
   editProduct() {
@@ -94,11 +98,13 @@ export class SaveProductComponent implements OnInit, OnDestroy {
               concatMap(existProduct => {
                   if (!existProduct)
                       return this.financialSvc.saveFinancialProducts(this.formProduct?.value);
-                  else
-                      return of({ code: 'EXIST_PRODUCT' });
+                  else {
+                    PRODUCT.code = 'EXIST_PRODUCT';
+                    return of(PRODUCT);
+                  }
               })
           ).subscribe({
-              next: (v) => {
+              next: (v: Product) => {
                   if (v && v.id) {
                       const messagge = `El producto se ha guardado con éxito.`;
                       this.openModal(messagge , true);

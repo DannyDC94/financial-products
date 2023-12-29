@@ -21,12 +21,12 @@ export class FinancialProductsService {
     return this.httpClient.get<Product[]>(URL_REQUEST, OPTIONS).pipe(catchError(this.handleError));
   }
 
-  saveFinancialProducts(data: any): Observable<any> {
-    return this.httpClient.post(URL_REQUEST, data, OPTIONS).pipe(catchError(this.handleError));
+  saveFinancialProducts(data: any): Observable<Product> {
+    return this.httpClient.post<Product>(URL_REQUEST, data, OPTIONS).pipe(catchError(this.handleError));
   }
 
-  editFinancialProducts(data: any): Observable<any> {
-    return this.httpClient.put(URL_REQUEST, data, OPTIONS).pipe(catchError(this.handleError));
+  editFinancialProducts(data: any): Observable<Product> {
+    return this.httpClient.put<Product>(URL_REQUEST, data, OPTIONS).pipe(catchError(this.handleError));
   }
 
   deleteFinancialProducts(id: string): Observable<any> {
@@ -34,9 +34,9 @@ export class FinancialProductsService {
     return this.httpClient.delete(url, OPTIONS).pipe(catchError(this.handleError));
   }
 
-  existFinancialProducts(id: string): Observable<any> {
+  existFinancialProducts(id: string): Observable<boolean> {
     const url = `${URL_REQUEST}/verification?id=${id}`
-    return this.httpClient.get(url, OPTIONS).pipe(catchError(this.handleError));
+    return this.httpClient.get<boolean>(url, OPTIONS).pipe(catchError(this.handleError));
   }
 
   private handleError(error: any): Observable<never> {

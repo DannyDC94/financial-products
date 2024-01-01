@@ -38,30 +38,35 @@ export class SaveProductComponent implements OnInit, OnDestroy {
 
   constructor(
       private financialSvc: FinancialProductsService,
-      private router: Router,
+      public router: Router,
       private route: ActivatedRoute,
       private spinner: NgxSpinnerService,
-      private fb: FormBuilder
+      public fb: FormBuilder
   ) {
-
+    if (this.fb) {
       this.formProduct = this.fb.group({
-          id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-          name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-          description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
-          logo: ['', [Validators.required]],
-          date_release: [Utils.formatDate(Utils.getCurrencyDate()), Validators.required],
-          date_revision: [Utils.formatDate(this.getDateEndDefault()), Validators.required]
+        id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+        name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+        description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
+        logo: ['', [Validators.required]],
+        date_release: [Utils.formatDate(Utils.getCurrencyDate()), Validators.required],
+        date_revision: [Utils.formatDate(this.getDateEndDefault()), Validators.required]
       });
+    }
   }
 
   ngOnInit() {
+    this.loadParams();
+  }
+
+  loadParams() {
     this.redirectAdmin = false;
     this.subscriptions.push(
-        this.route.queryParams.subscribe(data => {
-            this.action = data && data['type'] ? data['type'] : 'create';
-            if (this.action === 'edit')
-                this.dataForm = JSON.parse(data['data']);
-        })
+      this.route.queryParams.subscribe(data => {
+        this.action = data && data['type'] ? data['type'] : 'create';
+        if (this.action === 'edit')
+          this.dataForm = JSON.parse(data['data']);
+      })
     );
   }
   saveProduct(evt: any) {

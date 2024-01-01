@@ -16,16 +16,24 @@ describe('ModalComponent', () => {
     fixture.detectChanges();
   });
 
-  test(`should have as type 'confirm'`, () => {
-    const fixture = TestBed.createComponent(ModalComponent);
-    const component = fixture.componentInstance;
+  test(`Should have as type 'confirm'`, () => {
     expect(component.type).toEqual('confirm');
   });
 
-  test(`should have as type ''`, () => {
-    const fixture = TestBed.createComponent(ModalComponent);
-    const component = fixture.componentInstance;
+  test(`Should have as type ''`, () => {
     expect(component.message).toEqual('');
+  });
+
+  test(`Event confirm emit`, () => {
+    const emitSpy = jest.spyOn(component.confirm, 'emit');
+    component.onConfirm();
+    expect(emitSpy).toHaveBeenCalled();
+  });
+
+  test(`Event cancel emit`, () => {
+    const emitSpy = jest.spyOn(component.cancel, 'emit');
+    component.onCancel();
+    expect(emitSpy).toHaveBeenCalled();
   });
 
 });

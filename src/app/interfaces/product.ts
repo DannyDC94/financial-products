@@ -6,4 +6,6 @@ export interface Product {
   date_release: string,
   date_revision: string,
   code?: string
+  isDropdownActive?: boolean,
+  [key: string]: any;
 }

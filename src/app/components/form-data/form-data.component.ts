@@ -24,13 +24,21 @@ export class FormDataComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
     this.idSelect = '';
+    this.setMaxDate();
+    if (this.action === 'edit' && this.data)
+      this.loadDataForm(this.data);
+  }
+
+  setMaxDate() {
     const currentDate = Utils.getCurrencyDate();
     const yesterday = Utils.getCurrencyDate();
     yesterday.setDate(currentDate.getDate() - 1);
     this.maxDate = yesterday.toISOString().split('T')[0];
-    if (this.action === 'edit' && this.data)
-      this.loadDataForm(this.data);
   }
 
   getValueInput(name: string) {

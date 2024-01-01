@@ -1,15 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {HttpClientTestingModule} from '@angular/common/http/testing'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { SaveProductComponent } from '../../../app/pages/save-product/save-product.component';
 import { RouterTestingModule } from "@angular/router/testing";
-import {ComponentsModule} from "../../../app/components/components.module";
-import {ReactiveFormsModule} from "@angular/forms";
-import {NgxSpinnerModule} from "ngx-spinner";
-import {Observable, of} from "rxjs";
-import {Product} from "../../../app/interfaces";
-import {FinancialProductsService} from "../../../app/services/financial-products.service";
+import { ComponentsModule } from "../../../app/components/components.module";
+import {ReactiveFormsModule } from "@angular/forms";
+import { NgxSpinnerModule, NgxSpinnerService } from "ngx-spinner";
+import { Observable, of } from "rxjs";
+import { Product } from "../../../app/interfaces";
+import { FinancialProductsService } from "../../../app/services/financial-products.service";
+import {  Router } from '@angular/router';
+import { FormBuilder } from "@angular/forms";
+// import {} from '../../../assets/mocks'
 
-const mockProducts = {
+const mockProducts: Product = {
   id: "trg-111",
   name: "Tarjetas Visa",
   description: "Tarjetas para compras exterior",
@@ -31,6 +34,12 @@ const mockedFinancialProductsService: {
 describe('SaveProductComponent', () => {
   let component: SaveProductComponent;
   let fixture: ComponentFixture<SaveProductComponent>;
+  let route: any;
+  let router: Router;
+  let service: FinancialProductsService;
+  let componentNR: SaveProductComponent;
+  let spinnerSvc: NgxSpinnerService;
+  let formB: FormBuilder;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -49,11 +58,28 @@ describe('SaveProductComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SaveProductComponent);
     component = fixture.componentInstance;
+    route = {queryParams: of({ type: 'edit', data: JSON.stringify(mockProducts)})};
+    componentNR = new SaveProductComponent(service, router, route, spinnerSvc, formB);
     fixture.detectChanges();
   });
 
-  test('should create', () => {
+  test('Should create SaveProductComponent', () => {
     expect(component).toBeTruthy();
+  });
+
+  test('Load params', () => {
+    component.loadParams();
+    expect(component.redirectAdmin).toBe(false);
+    expect(component.action).toBe('create');
+    expect(component.dataForm).toBeUndefined();
+  });
+
+  test('Load props queryParams', () => {
+    componentNR.loadParams();
+    expect(componentNR.redirectAdmin).toBe(false);
+    expect(componentNR.action).toBe('edit');
+    component.dataForm = mockProducts;
+    expect(component.dataForm.name).toEqual('Tarjetas Visa');
   });
 
   test('Execute save product', () => {
@@ -80,6 +106,19 @@ describe('SaveProductComponent', () => {
     expect(component.showModal).toBeTruthy();
     expect(component.modalMessage).toEqual('El producto se ha actualizado con éxito.');
     expect(component.redirectAdmin).toBeTruthy();
+  });
+
+  test('Show message error', () => {
+    component.messageError();
+    component.openModal('Producto guardado con exito');
+    expect(component.showModal).toBe(true);
+    expect(component.modalMessage).toBe('Producto guardado con exito');
+    expect(component.redirectAdmin).toBe(false);
+  });
+
+  test('Click confirm', () => {
+    component.onConfirm();
+    expect(component.showModal).toBe(false);
   });
 
 });

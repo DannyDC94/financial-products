@@ -1,0 +1,10 @@
+{
+  "product": {
+    "id": "trg-111",
+    "name": "Tarjetas Visa",
+    "description": "Tarjetas para compras exterior",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg",
+    "date_release": "2023-12-04T00:00:00.000+00:00",
+    "date_revision": "2024-12-04T00:00:00.000+00:00"
+  }
+}

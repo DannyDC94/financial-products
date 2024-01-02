@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="50" failures="0" errors="0" time="5.016">
+  <testsuite name="Utils" errors="0" failures="0" skipped="0" timestamp="2024-01-02T02:37:36" time="2.065" tests="3">
+    <testcase classname="Utils getCurrencyDate should return the current date" name="Utils getCurrencyDate should return the current date" time="0.012">
+    </testcase>
+    <testcase classname="Utils formatDate should format the date correctly" name="Utils formatDate should format the date correctly" time="0.002">
+    </testcase>
+    <testcase classname="Utils formatDate should handle single-digit month and day" name="Utils formatDate should handle single-digit month and day" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="HeaderComponent" errors="0" failures="0" skipped="0" timestamp="2024-01-02T02:37:36" time="2.126" tests="1">
+    <testcase classname="HeaderComponent should have as logo &apos;assets/imgs/BP_logo.svg&apos;" name="HeaderComponent should have as logo &apos;assets/imgs/BP_logo.svg&apos;" time="0.086">
+    </testcase>
+  </testsuite>
+  <testsuite name="FinancialProductsService" errors="0" failures="0" skipped="0" timestamp="2024-01-02T02:37:36" time="2.142" tests="6">
+    <testcase classname="FinancialProductsService should be created" name="FinancialProductsService should be created" time="0.05">
+    </testcase>
+    <testcase classname="FinancialProductsService should get financial products" name="FinancialProductsService should get financial products" time="0.009">
+    </testcase>
+    <testcase classname="FinancialProductsService should save financial products" name="FinancialProductsService should save financial products" time="0.004">
+    </testcase>
+    <testcase classname="FinancialProductsService should edit financial products" name="FinancialProductsService should edit financial products" time="0.004">
+    </testcase>
+    <testcase classname="FinancialProductsService should delete financial products" name="FinancialProductsService should delete financial products" time="0.005">
+    </testcase>
+    <testcase classname="FinancialProductsService should check if financial products exist" name="FinancialProductsService should check if financial products exist" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="ModalComponent" errors="0" failures="0" skipped="0" timestamp="2024-01-02T02:37:36" time="2.147" tests="4">
+    <testcase classname="ModalComponent Should have as type &apos;confirm&apos;" name="ModalComponent Should have as type &apos;confirm&apos;" time="0.108">
+    </testcase>
+    <testcase classname="ModalComponent Should have as type &apos;&apos;" name="ModalComponent Should have as type &apos;&apos;" time="0.012">
+    </testcase>
+    <testcase classname="ModalComponent Event confirm emit" name="ModalComponent Event confirm emit" time="0.01">
+    </testcase>
+    <testcase classname="ModalComponent Event cancel emit" name="ModalComponent Event cancel emit" time="0.009">
+    </testcase>
+  </testsuite>
+  <testsuite name="DataTableComponent" errors="0" failures="0" skipped="0" timestamp="2024-01-02T02:37:36" time="2.284" tests="6">
+    <testcase classname="DataTableComponent Should create DataTableComponent" name="DataTableComponent Should create DataTableComponent" time="0.135">
+    </testcase>
+    <testcase classname="DataTableComponent Load data table" name="DataTableComponent Load data table" time="0.017">
+    </testcase>
+    <testcase classname="DataTableComponent Apply filter empty in data table" name="DataTableComponent Apply filter empty in data table" time="0.013">
+    </testcase>
+    <testcase classname="DataTableComponent Apply filter &quot;Hola&quot; in data table" name="DataTableComponent Apply filter &quot;Hola&quot; in data table" time="0.014">
+    </testcase>
+    <testcase classname="DataTableComponent Apply filter &quot;Tarjetas Visa&quot; in data table" name="DataTableComponent Apply filter &quot;Tarjetas Visa&quot; in data table" time="0.011">
+    </testcase>
+    <testcase classname="DataTableComponent Event btn action emit" name="DataTableComponent Event btn action emit" time="0.013">
+    </testcase>
+  </testsuite>
+  <testsuite name="FormDataComponent" errors="0" failures="0" skipped="0" timestamp="2024-01-02T02:37:36" time="2.459" tests="9">
+    <testcase classname="FormDataComponent Should create FormDataComponent" name="FormDataComponent Should create FormDataComponent" time="0.166">
+    </testcase>
+    <testcase classname="FormDataComponent Set max date" name="FormDataComponent Set max date" time="0.03">
+    </testcase>
+    <testcase classname="FormDataComponent Init Form Data" name="FormDataComponent Init Form Data" time="0.031">
+    </testcase>
+    <testcase classname="FormDataComponent Return form control by name" name="FormDataComponent Return form control by name" time="0.024">
+    </testcase>
+    <testcase classname="FormDataComponent Return null for non-existing form control" name="FormDataComponent Return null for non-existing form control" time="0.022">
+    </testcase>
+    <testcase classname="FormDataComponent Should set focusedControl and isFocus to true" name="FormDataComponent Should set focusedControl and isFocus to true" time="0.02">
+    </testcase>
+    <testcase classname="FormDataComponent Should set focusedControl to an empty string and isFocus to false" name="FormDataComponent Should set focusedControl to an empty string and isFocus to false" time="0.022">
+    </testcase>
+    <testcase classname="FormDataComponent Should emit btnSave event with the correct action" name="FormDataComponent Should emit btnSave event with the correct action" time="0.022">
+    </testcase>
+    <testcase classname="FormDataComponent Should set date_revision one year ahead when date_release is provided" name="FormDataComponent Should set date_revision one year ahead when date_release is provided" time="0.023">
+    </testcase>
+  </testsuite>
+  <testsuite name="SaveProductComponent" errors="0" failures="0" skipped="0" timestamp="2024-01-02T02:37:36" time="2.69" tests="8">
+    <testcase classname="SaveProductComponent Should create SaveProductComponent" name="SaveProductComponent Should create SaveProductComponent" time="0.196">
+    </testcase>
+    <testcase classname="SaveProductComponent Load params" name="SaveProductComponent Load params" time="0.036">
+    </testcase>
+    <testcase classname="SaveProductComponent Load props queryParams" name="SaveProductComponent Load props queryParams" time="0.031">
+    </testcase>
+    <testcase classname="SaveProductComponent Execute save product" name="SaveProductComponent Execute save product" time="0.032">
+    </testcase>
+    <testcase classname="SaveProductComponent Execute get product exist" name="SaveProductComponent Execute get product exist" time="0.029">
+    </testcase>
+    <testcase classname="SaveProductComponent Execute edit product" name="SaveProductComponent Execute edit product" time="0.026">
+    </testcase>
+    <testcase classname="SaveProductComponent Show message error" name="SaveProductComponent Show message error" time="0.028">
+    </testcase>
+    <testcase classname="SaveProductComponent Click confirm" name="SaveProductComponent Click confirm" time="0.026">
+    </testcase>
+  </testsuite>
+  <testsuite name="AdministrationComponent" errors="0" failures="0" skipped="0" timestamp="2024-01-02T02:37:36" time="2.826" tests="13">
+    <testcase classname="AdministrationComponent Should create AdministrationComponent" name="AdministrationComponent Should create AdministrationComponent" time="0.213">
+    </testcase>
+    <testcase classname="AdministrationComponent Load columns table" name="AdministrationComponent Load columns table" time="0.036">
+    </testcase>
+    <testcase classname="AdministrationComponent Load data of products" name="AdministrationComponent Load data of products" time="0.031">
+    </testcase>
+    <testcase classname="AdministrationComponent Load data of products error server" name="AdministrationComponent Load data of products error server" time="0.032">
+    </testcase>
+    <testcase classname="AdministrationComponent Should navigate to save product route for edit action" name="AdministrationComponent Should navigate to save product route for edit action" time="0.028">
+    </testcase>
+    <testcase classname="AdministrationComponent Should open confirm modal for delete action" name="AdministrationComponent Should open confirm modal for delete action" time="0.02">
+    </testcase>
+    <testcase classname="AdministrationComponent Should navigate to save product route create" name="AdministrationComponent Should navigate to save product route create" time="0.019">
+    </testcase>
+    <testcase classname="AdministrationComponent Delete product" name="AdministrationComponent Delete product" time="0.021">
+    </testcase>
+    <testcase classname="AdministrationComponent Delete product no remove product" name="AdministrationComponent Delete product no remove product" time="0.024">
+    </testcase>
+    <testcase classname="AdministrationComponent Delete product error server" name="AdministrationComponent Delete product error server" time="0.018">
+    </testcase>
+    <testcase classname="AdministrationComponent Click cancel button" name="AdministrationComponent Click cancel button" time="0.026">
+    </testcase>
+    <testcase classname="AdministrationComponent Click confirm button" name="AdministrationComponent Click confirm button" time="0.029">
+    </testcase>
+    <testcase classname="AdministrationComponent Click open modal" name="AdministrationComponent Click open modal" time="0.017">
+    </testcase>
+  </testsuite>
+</testsuites>

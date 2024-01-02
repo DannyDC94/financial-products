@@ -1,0 +1,2 @@
+after_script:
+  - cat ./coverage/lcov-report/index.html

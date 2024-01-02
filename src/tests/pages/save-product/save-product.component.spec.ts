@@ -96,6 +96,20 @@ describe('SaveProductComponent', () => {
     expect(component.redirectAdmin).toBeTruthy();
   });
 
+  test('Execute get product exist', () => {
+    component.saveProduct({ action: 'create' });
+    component.formProduct?.patchValue({...mockProducts});
+    expect(component.formProduct?.valid).toBeTruthy();
+    jest.spyOn(mockedFinancialProductsService, 'existFinancialProducts').mockReturnValue(of(true));
+    jest.spyOn(mockedFinancialProductsService, 'saveFinancialProducts').mockReturnValue(of(mockProducts));
+    component.saveNewProduct();
+    expect(mockedFinancialProductsService.existFinancialProducts).toHaveBeenCalled();
+    expect(mockedFinancialProductsService.saveFinancialProducts).toHaveBeenCalled();
+    expect(component.showModal).toBeTruthy();
+    expect(component.modalMessage).toEqual(`El producto con ID: ${mockProducts.id} ya existe.`);
+    expect(component.redirectAdmin).toBeFalsy();
+  });
+
   test('Execute edit product', () => {
     component.saveProduct({ action: 'edit' });
     component.formProduct?.patchValue({...mockProducts});

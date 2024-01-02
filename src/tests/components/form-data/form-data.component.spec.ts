@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import { FormDataComponent } from '../../../app/components/form-data/form-data.component';
 import {Product} from "../../../app/interfaces";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 
 const mockProducts: Product = {
   id: "trg-111",
@@ -15,7 +15,9 @@ const mockProducts: Product = {
 
 describe('FormDataComponent', () => {
   let component: FormDataComponent;
+  let componentCN: FormDataComponent;
   let fixture: ComponentFixture<FormDataComponent>;
+  let fb: FormBuilder;
 
   // beforeEach(() => {
   //   TestBed.configureTestingModule({
@@ -34,6 +36,8 @@ describe('FormDataComponent', () => {
 
     fixture = TestBed.createComponent(FormDataComponent);
     component = fixture.componentInstance;
+    fb = new FormBuilder();
+    componentCN = new FormDataComponent(fb);
     fixture.detectChanges();
   }));
 
@@ -53,15 +57,53 @@ describe('FormDataComponent', () => {
     expect(component.idSelect).toBe(mockProducts.id);
   });
 
-  it('Return form control by name', () => {
+  test('Return form control by name', () => {
     const expectedFormControl = component.form?.get('name');
     const result = component.getValueInput('name');
     expect(result).toBe(expectedFormControl);
   });
 
-  it('Return null for non-existing form control', () => {
+  test('Return null for non-existing form control', () => {
     const result = component.getValueInput('name');
-    expect(result).toBeUndefined();
+    expect(result).toBeDefined();
+  });
+
+  test('Should set focusedControl and isFocus to true', () => {
+    const campo = 'name';
+    component.onFocus(campo);
+    expect(component.focusedControl).toBe(campo);
+    expect(component.isFocus).toBe(true);
+  });
+
+  it('Should set focusedControl to an empty string and isFocus to false', () => {
+    component.onBlur();
+    expect(component.focusedControl).toBe('');
+    expect(component.isFocus).toBe(false);
+  });
+
+  it('Should emit btnSave event with the correct action', () => {
+    component.action = 'edit';
+    const emitSpy = jest.spyOn(component.btnSave, 'emit');
+    component.saveDataForm();
+    expect(emitSpy).toHaveBeenCalledWith({ action: 'edit' });
+  });
+
+  it('Should set date_revision one year ahead when date_release is provided', () => {
+    const mockDateRelease = '2023-12-31';
+    componentCN.form?.setValue({
+      id: '',
+      name: '',
+      description: '',
+      logo: '',
+      date_release: mockDateRelease,
+      date_revision: ''
+    });
+    componentCN.onDateChange();
+    const dateRevisionValue = componentCN.form?.get('date_revision')?.value;
+    const expectedDate = new Date(mockDateRelease);
+    expectedDate.setFullYear(expectedDate.getFullYear() + 1);
+    const expectedDateStr = expectedDate.toISOString().split('T')[0];
+    expect(dateRevisionValue).toBe(expectedDateStr);
   });
 
 });

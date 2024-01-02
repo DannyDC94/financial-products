@@ -4,9 +4,14 @@ import { AdministrationComponent } from '../../../app/pages/administration/admin
 import { FinancialProductsService } from '../../../app/services/financial-products.service';
 import { NgxSkeletonLoaderModule } from "ngx-skeleton-loader";
 import { ComponentsModule } from "../../../app/components/components.module";
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 import {NgxSpinnerModule} from "ngx-spinner";
-import {Observable, of} from "rxjs";
+import {Observable, of, throwError} from "rxjs";
 import {Product} from "../../../app/interfaces";
+
+const SAVE_PRODUCT_ROUTE = '/save-product';
+const EDIT_ACTION = 'edit';
 
 const mockProducts = {
   id: "trg-111",
@@ -37,6 +42,7 @@ const mockedColumns = [
 describe('AdministrationComponent', () => {
   let component: AdministrationComponent;
   let fixture: ComponentFixture<AdministrationComponent>;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -44,6 +50,7 @@ describe('AdministrationComponent', () => {
       imports: [
         HttpClientTestingModule,
         NgxSkeletonLoaderModule,
+        RouterTestingModule,
         ComponentsModule,
         NgxSpinnerModule
       ],
@@ -54,6 +61,8 @@ describe('AdministrationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AdministrationComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
+    jest.spyOn(router, 'navigate').mockImplementation(jest.fn());
     fixture.detectChanges();
   });
 
@@ -73,15 +82,60 @@ describe('AdministrationComponent', () => {
     expect(component.dataTable).toEqual([mockProducts]);
   });
 
-  test('Execute action product', () => {
-    component.actionProduct({ action: 'delete', data: mockProducts });
+  test('Load data of products error server', () => {
+    jest.spyOn(mockedFinancialProductsService, 'getFinancialProducts').mockReturnValue(throwError([mockProducts]));
+    component.loadProducts();
+    expect(mockedFinancialProductsService.getFinancialProducts).toHaveBeenCalled();
+    component.openModalMessage('Existen errores el eliminar el producto');
+    expect(component.showModalMessage).toBeTruthy();
+    expect(component.modalMessage).toEqual('Existen errores el eliminar el producto');
+  });
+
+  it('Should navigate to save product route for edit action', () => {
+    const mockEvent = { action: 'edit', data: mockProducts };
+    component.actionProduct(mockEvent);
+    expect(router.navigate).toHaveBeenCalledWith([SAVE_PRODUCT_ROUTE], {
+      queryParams: {
+        type: 'edit',
+        data: JSON.stringify(mockProducts)
+      }
+    });
+  });
+
+  it('Should open confirm modal for delete action', () => {
+    const mockEvent = { action: 'delete', data: mockProducts };
+    component.actionProduct(mockEvent);
     expect(component.idSelect).toEqual(mockProducts.id);
     expect(component.nombreSelect).toEqual(mockProducts.name);
     expect(component.confirmMessage).toEqual(`¿Estas seguro de eliminar el producto ${mockProducts.name}?`);
+    expect(router.navigate).not.toHaveBeenCalled();
   });
 
+  it('Should navigate to save product route create', () => {
+    const mockEvent = { action: 'create' };
+    component.actionProduct(mockEvent);
+    expect(router.navigate).toHaveBeenCalledWith(['/save-product'], {
+      queryParams: {
+        type: 'create'
+      }
+    });
+  });
+
+
   test('Delete product', () => {
-    jest.spyOn(mockedFinancialProductsService, 'deleteFinancialProducts').mockReturnValue(of('Product successfully removed'));
+    jest.spyOn(mockedFinancialProductsService, 'deleteFinancialProducts').mockReturnValue(of({text: 'Product successfully removed' }));
+    component.deleteProduct('trg-111');
+    expect(mockedFinancialProductsService.deleteFinancialProducts).toHaveBeenCalled();
+  });
+
+  test('Delete product no remove product', () => {
+    jest.spyOn(mockedFinancialProductsService, 'deleteFinancialProducts').mockReturnValue(of({text: 'Error delete product' }));
+    component.deleteProduct('trg-111');
+    expect(mockedFinancialProductsService.deleteFinancialProducts).toHaveBeenCalled();
+  });
+
+  test('Delete product error server', () => {
+    jest.spyOn(mockedFinancialProductsService, 'deleteFinancialProducts').mockReturnValue(throwError({text: 'Error delete product server' }));
     component.deleteProduct('trg-111');
     expect(mockedFinancialProductsService.deleteFinancialProducts).toHaveBeenCalled();
   });

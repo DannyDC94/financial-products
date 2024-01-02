@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utils } from "../../utils/utils";
 import {Product} from "../../interfaces";
 
@@ -20,7 +20,17 @@ export class FormDataComponent implements OnInit {
   focusedControl: string = '';
   isFocus: boolean = false;
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
+    if (this.fb) {
+      this.form = this.fb.group({
+        date_release: ['', Validators.required],
+        date_revision: [''],
+        id: [''],
+        name: [''],
+        description: [''],
+        logo: ['']
+      });
+    }
   }
 
   ngOnInit() {
